@@ -57,6 +57,21 @@ h1{font-size:clamp(27px,7vw,42px);margin:10px 0 4px;color:#a52d5c}
  50%{transform:translate(-55%,-50%) rotate(12deg)}
  100%{transform:translate(-50%,-50%)}
 }
+ .slap-hand{
+ position:absolute;
+ left:-100px;
+ top:45%;
+ font-size:75px;
+ z-index:10;
+ pointer-events:none;
+ animation:slapHand .45s ease-in-out forwards;
+}
+
+@keyframes slapHand{
+ 0%{left:-90px;transform:rotate(-35deg) scale(.7)}
+ 65%{left:calc(50% - 35px);transform:rotate(15deg) scale(1.2)}
+ 100%{left:calc(50% - 35px);transform:rotate(0) scale(0);opacity:0}
+}
 #bubble{position:absolute;top:12px;left:50%;transform:translateX(-50%);background:white;border:2px solid #ffb5cc;border-radius:18px;padding:10px 14px;font-weight:800;max-width:90%;box-shadow:0 4px 12px #a52d5c18}
 .items{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin:12px 0}
 .item{border:0;border-radius:15px;padding:10px 13px;background:#fff0f5;color:#8b3156;font-size:17px;font-weight:700;box-shadow:0 3px 0 #f4b5ca;touch-action:manipulation}
