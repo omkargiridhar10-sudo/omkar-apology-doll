@@ -161,7 +161,19 @@ const apologies=[
 "It was my fault. I'm sorry.",
 "I'm sorry. Can I make it up to you?"
 ];
+function speakApology(text){
+ if(!('speechSynthesis' in window)) return;
 
+ window.speechSynthesis.cancel();
+
+ const voice = new SpeechSynthesisUtterance(text);
+ voice.lang = 'en-IN';
+ voice.rate = 0.9;
+ voice.pitch = 1.1;
+ voice.volume = 1;
+
+ window.speechSynthesis.speak(voice);
+}
 function bonk(item){
  count++;
  countEl.textContent=count;
