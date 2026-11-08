@@ -171,13 +171,24 @@ function bonk(item){
  void doll.offsetWidth;
  doll.classList.add('hit');
 
- const fly=document.createElement('div');
- fly.textContent=item;
- fly.style.cssText='position:absolute;left:50%;top:52%;font-size:42px;z-index:5;pointer-events:none;animation:fly .45s ease-out forwards';
- document.getElementById('stage').appendChild(fly);
- setTimeout(()=>fly.remove(),500);
+ const head=document.querySelector('.head');
+ head.classList.remove('slap');
+ void head.offsetWidth;
+ head.classList.add('slap');
 
- toast.textContent='Bonk! Omkar says: “I am sorry.”';
+ const hand=document.createElement('div');
+ hand.className='slap-hand';
+ hand.textContent='🖐️';
+ document.getElementById('stage').appendChild(hand);
+ setTimeout(()=>hand.remove(),500);
+
+ const impact=document.createElement('div');
+ impact.textContent='💥';
+ impact.style.cssText='position:absolute;left:55%;top:42%;font-size:45px;z-index:11;animation:fly .5s ease forwards;pointer-events:none';
+ document.getElementById('stage').appendChild(impact);
+ setTimeout(()=>impact.remove(),500);
+
+ toast.textContent='SLAP! 😂 Omkar says: "I AM SORRY, GAURI!"';
 }
 
 document.querySelectorAll('.item[data-item]').forEach(b=>{
