@@ -47,8 +47,16 @@ h1{font-size:clamp(27px,7vw,42px);margin:10px 0 4px;color:#a52d5c}
 .leg{position:absolute;top:236px;width:32px;height:52px;background:#f2c49e;border:3px solid #7d4a45;border-radius:15px}
 .leg.left{left:53px}
 .leg.right{right:53px}
-#doll.hit{animation:bonk .38s ease}
-@keyframes bonk{0%{transform:translate(-50%,-50%) rotate(0) scale(1)}25%{transform:translate(-50%,-50%) rotate(-13deg) scale(.94)}55%{transform:translate(-50%,-50%) rotate(13deg) scale(.94)}100%{transform:translate(-50%,-50%) rotate(0) scale(1)}}
+#doll.hit{
+ animation:bonk .45s ease;
+}
+
+@keyframes bonk{
+ 0%{transform:translate(-50%,-50%)}
+ 25%{transform:translate(-42%,-50%) rotate(-12deg)}
+ 50%{transform:translate(-55%,-50%) rotate(12deg)}
+ 100%{transform:translate(-50%,-50%)}
+}
 #bubble{position:absolute;top:12px;left:50%;transform:translateX(-50%);background:white;border:2px solid #ffb5cc;border-radius:18px;padding:10px 14px;font-weight:800;max-width:90%;box-shadow:0 4px 12px #a52d5c18}
 .items{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin:12px 0}
 .item{border:0;border-radius:15px;padding:10px 13px;background:#fff0f5;color:#8b3156;font-size:17px;font-weight:700;box-shadow:0 3px 0 #f4b5ca;touch-action:manipulation}
