@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#ffe5ef">
+<title>Gauri's Anger Therapy — Omkar Edition</title>
+<style>
+:root{--pink:#ff6f9f;--deep:#a52d5c;--cream:#fff8f5;--ink:#54263a}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);background:radial-gradient(circle at top,#fff 0,#ffe9f1 48%,#ffd6e5 100%);min-height:100vh}
+main{width:min(760px,100%);margin:auto;padding:22px 16px 40px;text-align:center}
+h1{font-size:clamp(27px,7vw,42px);margin:10px 0 4px;color:#a52d5c}
+.sub{margin:0 auto 18px;max-width:520px}
+.card{background:#ffffffd9;border:1px solid #fff;border-radius:24px;padding:16px;box-shadow:0 12px 35px #a52d5c18;margin:14px 0}
+#stage{height:390px;max-height:65vh;min-height:330px;position:relative;overflow:hidden;border-radius:20px;background:linear-gradient(#fff1f6,#ffe1ed);touch-action:pan-y}
+#doll{position:absolute;left:50%;top:49%;transform:translate(-50%,-50%);width:190px;height:290px;transition:transform .15s;user-select:none}
+.head{position:absolute;top:0;left:37px;width:116px;height:125px;border-radius:48% 48% 45% 45%;background:#f2c49e;border:3px solid #7d4a45;overflow:hidden;box-shadow:inset 0 -8px 0 #e7ad8b}
+#facePhoto{width:100%;height:100%;object-fit:cover;display:none}
+#faceEmoji{font-size:76px;line-height:120px}
+.hair{position:absolute;top:-8px;left:31px;width:128px;height:50px;background:#34222a;border-radius:60% 60% 25% 25%;z-index:2;pointer-events:none}
+.body{position:absolute;top:112px;left:22px;width:146px;height:135px;background:#ff8bb2;border:3px solid #7d4a45;border-radius:38px 38px 24px 24px}
+.arm{position:absolute;top:132px;width:28px;height:105px;background:#f2c49e;border:3px solid #7d4a45;border-radius:18px;z-index:-1}
+.arm.left{left:0;transform:rotate(18deg)}
+.arm.right{right:0;transform:rotate(-18deg)}
+.leg{position:absolute;top:236px;width:32px;height:52px;background:#f2c49e;border:3px solid #7d4a45;border-radius:15px}
+.leg.left{left:53px}
+.leg.right{right:53px}
+#doll.hit{animation:bonk .38s ease}
+@keyframes bonk{0%{transform:translate(-50%,-50%) rotate(0) scale(1)}25%{transform:translate(-50%,-50%) rotate(-13deg) scale(.94)}55%{transform:translate(-50%,-50%) rotate(13deg) scale(.94)}100%{transform:translate(-50%,-50%) rotate(0) scale(1)}}
+#bubble{position:absolute;top:12px;left:50%;transform:translateX(-50%);background:white;border:2px solid #ffb5cc;border-radius:18px;padding:10px 14px;font-weight:800;max-width:90%;box-shadow:0 4px 12px #a52d5c18}
+.items{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin:12px 0}
+.item{border:0;border-radius:15px;padding:10px 13px;background:#fff0f5;color:#8b3156;font-size:17px;font-weight:700;box-shadow:0 3px 0 #f4b5ca;touch-action:manipulation}
+.item:active{transform:translateY(2px);box-shadow:none}
+.row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+input{width:min(440px,100%);padding:13px 14px;border:2px solid #ffc0d3;border-radius:14px;font-size:16px;outline:none}
+button.primary{background:var(--pink);color:white;border:0;border-radius:14px;padding:12px 18px;font-weight:800;font-size:16px}
+label.upload{display:inline-block;background:#fff0f5;border:2px dashed #f09ab8;padding:10px 14px;border-radius:13px;font-weight:700;cursor:pointer}
+input[type=file]{display:none}
+.small{font-size:12px;opacity:.72}
+.counter{font-weight:800;color:#a52d5c}
+#toast{min-height:24px;font-weight:700;color:#a52d5c}
+</style>
+</head>
+<body>
+<main>
+<h1>Gauri's Anger Therapy 💗</h1>
+<p class="sub">A safe little place to let it all out. Omkar's apology doll is ready. He has exactly one response…</p>
+
+<section class="card">
+<div id="stage" aria-label="Play area">
+<div id="bubble" aria-live="polite">I'm sorry, Gauri. 🥺</div>
+<div id="doll">
+<div class="hair"></div>
+<div class="head">
+<div id="faceEmoji">👨🏻</div>
+<img id="facePhoto" alt="Omkar's face">
+</div>
+<div class="arm left"></div>
+<div class="arm right"></div>
+<div class="body"></div>
+<div class="leg left"></div>
+<div class="leg right"></div>
+</div>
+</div>
+
+<p class="counter">Bonks: <span id="count">0</span> · Apologies: unlimited</p>
+
+<div class="items" aria-label="Choose an item">
+<button class="item" data-item="🩴">🩴 Slipper</button>
+<button class="item" data-item="🍅">🍅 Tomato</button>
+<button class="item" data-item="🧸">🧸 Pillow</button>
+<button class="item" data-item="🥊">🥊 Boxing glove</button>
+<button class="item" data-item="🐟">🐟 Fish</button>
+<button class="item" data-item="🧽">🧽 Sponge</button>
+</div>
+
+<p class="small">Tap an item to bonk the doll, or drag it onto him.</p>
+<div id="toast"></div>
+</section>
+
+<section class="card">
+<h2>Give the doll your best scolding 💬</h2>
+<p>Type whatever you need to say. His reply will always be an apology.</p>
+<form id="rantForm" class="row">
+<input id="rant" maxlength="240" placeholder="Say what's on your mind…" autocomplete="off">
+<button class="primary" type="submit">Send</button>
+</form>
+<p class="small">Your message stays in this browser and is not sent anywhere.</p>
+</section>
+
+<section class="card">
+<h3>Put Omkar's actual face on the doll 📸</h3>
+<p>Choose a clear selfie. It is fitted locally on this device and isn't uploaded to a server.</p>
+<label class="upload">Choose Omkar's photo
+<input id="photoInput" type="file" accept="image/*">
+</label>
+<button class="item" id="resetPhoto" type="button">Reset face</button>
+</section>
+
+<p class="small">Made with love (and a very apologetic Omkar) ❤️</p>
+</main>
+
+<script>
+const doll=document.getElementById('doll');
+const bubble=document.getElementById('bubble');
+const countEl=document.getElementById('count');
+const toast=document.getElementById('toast');
+let count=0;
+
+const apologies=[
+"I'm sorry, Gauri. 🥺",
+"You're right. I'm sorry. ❤️",
+"I messed up. Please forgive me.",
+"Sorry, sweetheart. I owe you one.",
+"I hear you, Gauri. I'm sorry.",
+"It was my fault. I'm sorry.",
+"I'm sorry. Can I make it up to you?"
+];
+
+function bonk(item){
+ count++;
+ countEl.textContent=count;
+ bubble.textContent=apologies[(count-1)%apologies.length];
+
+ doll.classList.remove('hit');
+ void doll.offsetWidth;
+ doll.classList.add('hit');
+
+ const fly=document.createElement('div');
+ fly.textContent=item;
+ fly.style.cssText='position:absolute;left:50%;top:52%;font-size:42px;z-index:5;pointer-events:none;animation:fly .45s ease-out forwards';
+ document.getElementById('stage').appendChild(fly);
+ setTimeout(()=>fly.remove(),500);
+
+ toast.textContent='Bonk! Omkar says: “I am sorry.”';
+}
+
+document.querySelectorAll('.item[data-item]').forEach(b=>{
+ b.addEventListener('click',()=>bonk(b.dataset.item));
+});
+
+document.getElementById('rantForm').addEventListener('submit',e=>{
+ e.preventDefault();
+ const v=document.getElementById('rant').value.trim();
+ if(!v)return;
+ bubble.textContent="I'm sorry, Gauri. I understand. 🥺";
+ toast.textContent='Message delivered to the apology department. (No judgement.)';
+ document.getElementById('rant').value='';
+});
+
+const input=document.getElementById('photoInput');
+const photo=document.getElementById('facePhoto');
+const emoji=document.getElementById('faceEmoji');
+
+input.addEventListener('change',()=>{
+ const f=input.files&&input.files[0];
+ if(!f)return;
+ const url=URL.createObjectURL(f);
+ photo.src=url;
+ photo.style.display='block';
+ emoji.style.display='none';
+});
+
+document.getElementById('resetPhoto').addEventListener('click',()=>{
+ photo.removeAttribute('src');
+ photo.style.display='none';
+ emoji.style.display='block';
+ input.value='';
+});
+
+document.querySelectorAll('.item[data-item]').forEach(btn=>{
+ btn.addEventListener('pointerup',e=>{
+  const r=document.getElementById('stage').getBoundingClientRect();
+  if(e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom){
+   bonk(btn.dataset.item);
+  }
+ });
+});
+
+const style=document.createElement('style');
+style.textContent='@keyframes fly{0%{transform:translate(-50%,-50%) scale(.5) rotate(0);opacity:1}100%{transform:translate(-50%,-190%) scale(1.5) rotate(35deg);opacity:0}}';
+document.head.appendChild(style);
+</script>
+</body>
+</html>
