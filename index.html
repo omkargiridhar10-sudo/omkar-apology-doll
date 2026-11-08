@@ -202,7 +202,8 @@ function bonk(item){
 
  toast.textContent='SLAP! 😂 Omkar says: "I AM SORRY, GAURI!"';
 }
-
+speakApology(apologies[(count-1)%apologies.length]);
+ 
 document.querySelectorAll('.item[data-item]').forEach(b=>{
  b.addEventListener('click',()=>bonk(b.dataset.item));
 });
