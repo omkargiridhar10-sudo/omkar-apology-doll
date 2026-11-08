@@ -162,17 +162,32 @@ const apologies=[
 "I'm sorry. Can I make it up to you?"
 ];
 function speakApology(text){
- if(!('speechSynthesis' in window)) return;
+ if(!window.speechSynthesis){
+  toast.textContent="Sorry! Voice is not supported by this browser.";
+  return;
+ }
 
- window.speechSynthesis.cancel();
+ const speaker = window.speechSynthesis;
+ speaker.cancel();
 
- const voice = new SpeechSynthesisUtterance(text);
- voice.lang = 'en-IN';
- voice.rate = 0.9;
- voice.pitch = 1.1;
- voice.volume = 1;
+ const message = new SpeechSynthesisUtterance(text);
+ message.lang = 'en-US';
+ message.rate = 0.85;
+ message.pitch = 1.15;
+ message.volume = 1;
 
- window.speechSynthesis.speak(voice);
+ const voices = speaker.getVoices();
+ const englishVoice = voices.find(v => v.lang === 'en-IN')
+                   || voices.find(v => v.lang.startsWith('en'));
+
+ if(englishVoice){
+  message.voice = englishVoice;
+ }
+
+ speaker.resume();
+ speaker.speak(message);
+
+ toast.textContent="🔊 Omkar is speaking!";
 }
 function bonk(item){
  count++;
